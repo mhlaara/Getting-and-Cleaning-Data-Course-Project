@@ -122,9 +122,11 @@ head(str(dataTable),2)
 ##  $ fBodyBodyGyroMag-mean()    : num  -0.862 -0.958 -0.985 -0.199 -0.186 ...
 ##  $ fBodyBodyGyroMag-std()     : num  -0.824 -0.932 -0.978 -0.321 -0.398 ...
 ##  $ fBodyBodyGyroJerkMag-mean(): num  -0.942 -0.99 -0.995 -0.319 -0.282 ...
-##  $ fBodyBodyGyroJerkMag-std() : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...```
+##  $ fBodyBodyGyroJerkMag-std() : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...
+```
 
-```## NULL```
+```## NULL
+```
 
 ```names(dataTable)<-gsub("std()", "SD", names(dataTable))
 names(dataTable)<-gsub("mean()", "MEAN", names(dataTable))
@@ -135,7 +137,8 @@ names(dataTable)<-gsub("Gyro", "Gyroscope", names(dataTable))
 names(dataTable)<-gsub("Mag", "Magnitude", names(dataTable))
 names(dataTable)<-gsub("BodyBody", "Body", names(dataTable)
 # Names after
-head(str(dataTable),6)```
+head(str(dataTable),6)
+```
 
 ```## Classes 'tbl_df', 'tbl' and 'data.frame':    180 obs. of  69 variables:
 ##  $ subject                                       : int  1 1 1 1 1 1 2 2 2 2 ...
@@ -206,8 +209,10 @@ head(str(dataTable),6)```
 ##  $ frequencyBodyGyroscopeMagnitude-MEAN()        : num  -0.862 -0.958 -0.985 -0.199 -0.186 ...
 ##  $ frequencyBodyGyroscopeMagnitude-SD()          : num  -0.824 -0.932 -0.978 -0.321 -0.398 ...
 ##  $ frequencyBodyGyroscopeJerkMagnitude-MEAN()    : num  -0.942 -0.99 -0.995 -0.319 -0.282 ...
-##  $ frequencyBodyGyroscopeJerkMagnitude-SD()      : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...```
-```## NULL```
+##  $ frequencyBodyGyroscopeJerkMagnitude-SD()      : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...
+```
+```## NULL
+```
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
