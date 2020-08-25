@@ -1,24 +1,24 @@
 # 1. Merges the training and the test sets to create one data set.
 
-## for both Activity and Subject files this will merge the training and the test sets by row binding and rename variables "subject" and "activityNum"
+#### for both Activity and Subject files this will merge the training and the test sets by row binding and rename variables "subject" and "activityNum"
 alldataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
 setnames(alldataSubject, "V1", "subject")
 alldataActivity<- rbind(dataActivityTrain, dataActivityTest)
 setnames(alldataActivity, "V1", "activityNum")
 
-## combine the DATA training and test files
+#### combine the DATA training and test files
 dataTable <- rbind(dataTrain, dataTest)
 
-## name variables according to feature e.g.(V1 = "tBodyAcc-mean()-X")
+#### name variables according to feature e.g.(V1 = "tBodyAcc-mean()-X")
 dataFeatures <- tbl_df(read.table(file.path(filesPath, "features.txt")))
 setnames(dataFeatures, names(dataFeatures), c("featureNum", "featureName"))
 colnames(dataTable) <- dataFeatures$featureName
 
-## column names for activity labels
+#### column names for activity labels
 activityLabels<- tbl_df(read.table(file.path(filesPath, "activity_labels.txt")))
 setnames(activityLabels, names(activityLabels), c("activityNum","activityName"))
 
-## Merge columns
+#### Merge columns
 alldataSubjAct<- cbind(alldataSubject, alldataActivity)
 dataTable <- cbind(alldataSubjAct, dataTable)
 
@@ -26,17 +26,17 @@ dataTable <- cbind(alldataSubjAct, dataTable)
 # Reading "features.txt" and extracting only the mean and standard deviation
 dataFeaturesMeanStd <- grep("mean\\(\\)|std\\(\\)",dataFeatures$featureName,value=TRUE) #var name
 
-## Taking only measurements for the mean and standard deviation and add "subject","activityNum"
+#### Taking only measurements for the mean and standard deviation and add "subject","activityNum"
 
 dataFeaturesMeanStd <- union(c("subject","activityNum"), dataFeaturesMeanStd)
 dataTable<- subset(dataTable,select=dataFeaturesMeanStd) 
 
 # 3. Uses descriptive activity names to name the activities in the data set
-## enter name of activity into dataTable
+#### enter name of activity into dataTable
 dataTable <- merge(activityLabels, dataTable , by="activityNum", all.x=TRUE)
 dataTable$activityName <- as.character(dataTable$activityName)
 
-## create dataTable with variable means sorted by subject and Activity
+#### create dataTable with variable means sorted by subject and Activity
 dataTable$activityName <- as.character(dataTable$activityName)
 dataAggr<- aggregate(. ~ subject - activityName, data = dataTable, mean) 
 dataTable<- tbl_df(arrange(dataAggr,subject,activityName))
@@ -51,9 +51,9 @@ Jerk = sudden movement acceleration
 Mag = magnitude of movement
 mean and SD are calculated for each subject for each activity for each mean and SD measurements. The units given are g’s for the accelerometer and rad/sec for the gyro and g/sec and rad/sec/sec for the corresponding jerks.
 
-#Names before
+Names before
 head(str(dataTable),2)
-`## Classes 'tbl_df', 'tbl' and 'data.frame':    180 obs. of  69 variables:
+```## Classes 'tbl_df', 'tbl' and 'data.frame':    180 obs. of  69 variables:
 ##  $ subject                    : int  1 1 1 1 1 1 2 2 2 2 ...
 ##  $ activityName               : chr  "LAYING" "SITTING" "STANDING" "WALKING" ...
 ##  $ activityNum                : num  6 4 5 1 3 2 6 4 5 1 ...
@@ -122,11 +122,11 @@ head(str(dataTable),2)
 ##  $ fBodyBodyGyroMag-mean()    : num  -0.862 -0.958 -0.985 -0.199 -0.186 ...
 ##  $ fBodyBodyGyroMag-std()     : num  -0.824 -0.932 -0.978 -0.321 -0.398 ...
 ##  $ fBodyBodyGyroJerkMag-mean(): num  -0.942 -0.99 -0.995 -0.319 -0.282 ...
-##  $ fBodyBodyGyroJerkMag-std() : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...`
+##  $ fBodyBodyGyroJerkMag-std() : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...```
 
-`## NULL`
+```## NULL```
 
-`names(dataTable)<-gsub("std()", "SD", names(dataTable))
+```names(dataTable)<-gsub("std()", "SD", names(dataTable))
 names(dataTable)<-gsub("mean()", "MEAN", names(dataTable))
 names(dataTable)<-gsub("^t", "time", names(dataTable))
 names(dataTable)<-gsub("^f", "frequency", names(dataTable))
@@ -135,9 +135,9 @@ names(dataTable)<-gsub("Gyro", "Gyroscope", names(dataTable))
 names(dataTable)<-gsub("Mag", "Magnitude", names(dataTable))
 names(dataTable)<-gsub("BodyBody", "Body", names(dataTable)
 # Names after
-head(str(dataTable),6)`
+head(str(dataTable),6)```
 
-`## Classes 'tbl_df', 'tbl' and 'data.frame':    180 obs. of  69 variables:
+```## Classes 'tbl_df', 'tbl' and 'data.frame':    180 obs. of  69 variables:
 ##  $ subject                                       : int  1 1 1 1 1 1 2 2 2 2 ...
 ##  $ activityName                                  : chr  "LAYING" "SITTING" "STANDING" "WALKING" ...
 ##  $ activityNum                                   : num  6 4 5 1 3 2 6 4 5 1 ...
@@ -206,9 +206,10 @@ head(str(dataTable),6)`
 ##  $ frequencyBodyGyroscopeMagnitude-MEAN()        : num  -0.862 -0.958 -0.985 -0.199 -0.186 ...
 ##  $ frequencyBodyGyroscopeMagnitude-SD()          : num  -0.824 -0.932 -0.978 -0.321 -0.398 ...
 ##  $ frequencyBodyGyroscopeJerkMagnitude-MEAN()    : num  -0.942 -0.99 -0.995 -0.319 -0.282 ...
-##  $ frequencyBodyGyroscopeJerkMagnitude-SD()      : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...`
-`## NULL`
+##  $ frequencyBodyGyroscopeJerkMagnitude-SD()      : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...```
+```## NULL```
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-##write to text file on disk
+
+#### write to text file on disk
 write.table(dataTable, "TidyData.txt", row.name=FALSE)
