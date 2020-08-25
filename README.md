@@ -23,7 +23,7 @@ alldataSubjAct<- cbind(alldataSubject, alldataActivity)
 dataTable <- cbind(alldataSubjAct, dataTable)
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-# Reading "features.txt" and extracting only the mean and standard deviation
+#### Reading "features.txt" and extracting only the mean and standard deviation
 dataFeaturesMeanStd <- grep("mean\\(\\)|std\\(\\)",dataFeatures$featureName,value=TRUE) #var name
 
 #### Taking only measurements for the mean and standard deviation and add "subject","activityNum"
@@ -210,8 +210,6 @@ head(str(dataTable),6)
 ##  $ frequencyBodyGyroscopeMagnitude-SD()          : num  -0.824 -0.932 -0.978 -0.321 -0.398 ...
 ##  $ frequencyBodyGyroscopeJerkMagnitude-MEAN()    : num  -0.942 -0.99 -0.995 -0.319 -0.282 ...
 ##  $ frequencyBodyGyroscopeJerkMagnitude-SD()      : num  -0.933 -0.987 -0.995 -0.382 -0.392 ...
-```
-```## NULL
 ```
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
